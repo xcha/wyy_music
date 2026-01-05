@@ -8,6 +8,7 @@ export default async function Home() {
   const [banners, playlists] = await Promise.all([
     getBanner(),
     getPersonalized(10)
+
   ]);
 
   return (

@@ -9,7 +9,9 @@ import {
   Volume2, 
   Repeat, 
   ListMusic,
-  Maximize2
+  Maximize2,
+  Shuffle,
+  Repeat1
 } from "lucide-react";
 import { Slider } from "@/components/ui/slider";
 import Image from "next/image";
@@ -26,7 +28,9 @@ export const PlayerBar = () => {
     playNext, 
     playPrev, 
     volume, 
-    setVolume 
+    setVolume,
+    playMode,
+    togglePlayMode
   } = usePlayerStore();
 
   const audioRef = useRef<HTMLAudioElement>(null);
@@ -107,7 +111,14 @@ export const PlayerBar = () => {
   };
 
   const handleEnded = () => {
-    playNext();
+    if (playMode === 'single') {
+        if (audioRef.current) {
+            audioRef.current.currentTime = 0;
+            audioRef.current.play();
+        }
+    } else {
+        playNext();
+    }
   };
 
   const formatTime = (time: number) => {
@@ -234,22 +245,31 @@ export const PlayerBar = () => {
             {/* 音量 */}
             <div className="flex items-center gap-2 group relative">
                 <Volume2 className="w-4 h-4 text-[#888] hover:text-white cursor-pointer" />
-                <div className="w-16 hidden group-hover:block absolute bottom-8 left-1/2 -translate-x-1/2 bg-[#2b2b2b] p-2 rounded shadow-lg border border-[#191919]">
-                    <div className="h-24 flex justify-center">
-                        <Slider 
-                            orientation="vertical"
-                            value={[volume]} 
-                            max={100} 
-                            step={1}
-                            onValueChange={(val) => setVolume(val[0])}
-                            className="h-full"
-                        />
-                    </div>
+                {/* 修复音量条超出父元素问题：调整定位和高度，使用 h-[100px] 限制高度 */}
+                <div className="hidden group-hover:flex absolute bottom-3 left-1/2 -translate-x-1/2 bg-[#2b2b2b] p-2 rounded shadow-lg border border-[#191919] h-[180px] flex-col items-center justify-center w-8 z-50">
+                    <Slider 
+                        orientation="vertical"
+                        value={[volume]} 
+                        max={100} 
+                        step={1}
+                        onValueChange={(val) => setVolume(val[0])}
+                        className="h-[100%]"
+                        trackClassName="bg-[#191919]"
+                        rangeClassName="bg-[#e83c3c]"
+                    />
                 </div>
             </div>
             
-            {/* 循环模式 (Icon placeholder) */}
-            <Repeat className="w-4 h-4 text-[#888] hover:text-white cursor-pointer" />
+            {/* 播放模式 */}
+            <button onClick={togglePlayMode} className="hover:text-white text-[#888] transition">
+              {playMode === 'random' ? (
+                <Shuffle className="w-4 h-4" />
+              ) : playMode === 'single' ? (
+                <Repeat1 className="w-4 h-4" />
+              ) : (
+                <Repeat className="w-4 h-4" />
+              )}
+            </button>
             
             {/* 播放列表 */}
             <div className="flex items-center bg-[#191919] hover:bg-[#1f1f1f] rounded-l-full rounded-r-full px-2 py-1 cursor-pointer transition ml-2">

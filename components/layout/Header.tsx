@@ -33,10 +33,7 @@ const Header = () => {
           <nav className="hidden md:flex items-center gap-6 text-sm text-gray-300">
             <Link href="/" className="hover:text-white hover:bg-black/20 px-4 py-2 rounded-md transition">发现音乐</Link>
             <Link href="/my" className="hover:text-white hover:bg-black/20 px-4 py-2 rounded-md transition">我的音乐</Link>
-            <Link href="/friend" className="hover:text-white hover:bg-black/20 px-4 py-2 rounded-md transition">关注</Link>
-            <Link href="/store" className="hover:text-white hover:bg-black/20 px-4 py-2 rounded-md transition">商城</Link>
-            <Link href="/musician" className="hover:text-white hover:bg-black/20 px-4 py-2 rounded-md transition">音乐人</Link>
-            <Link href="/download" className="hover:text-white hover:bg-black/20 px-4 py-2 rounded-md transition">下载客户端</Link>
+            <Link href="/about" className="hover:text-white hover:bg-black/20 px-4 py-2 rounded-md transition">关于恋次</Link>
           </nav>
         </div>
 
