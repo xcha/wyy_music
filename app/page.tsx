@@ -13,6 +13,14 @@ export default async function Home() {
 
   return (
     <div className="container mx-auto px-6 py-8">
+      <div className="mb-6 flex justify-center md:hidden">
+        <Link 
+          href="/about" 
+          className="px-4 py-2 rounded-full bg-red-600 text-white text-sm shadow hover:bg-red-700 active:scale-[0.98] transition"
+        >
+          关于恋次
+        </Link>
+      </div>
       {/* Banners */}
       <section className="mb-10">
         <div className="flex gap-6 overflow-x-auto pb-4 scrollbar-hide">

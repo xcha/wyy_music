@@ -30,12 +30,13 @@ export default function RootLayout({
     <html lang="en">
       <head>
         <meta name="referrer" content="no-referrer" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
       </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased pb-16 pt-16`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased pb-[calc(53px+env(safe-area-inset-bottom))] pt-16`}
       >
         <Header />
-        <main className="min-h-[calc(100vh-120px)]">{children}</main>
+        <main className="min-h-[calc(100dvh-120px)]">{children}</main>
         <PlayerBar />
       </body>
     </html>

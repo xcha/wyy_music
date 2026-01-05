@@ -145,7 +145,7 @@ export const PlayerBar = () => {
         <div className="absolute inset-0 bg-cover bg-center opacity-5" style={{ backgroundImage: `url(${currentSong.al.picUrl})` }} />
       )}
 
-      <div className="relative z-10 container mx-auto max-w-[980px] h-full flex items-center justify-between px-4 sm:px-0">
+      <div className="relative z-10 container mx-auto max-w-[980px] h-full flex items-center justify-between px-2 sm:px-0">
         
         {/* 左侧控制按钮 */}
         <div className="flex items-center gap-2 w-[137px]">
@@ -176,7 +176,7 @@ export const PlayerBar = () => {
         </div>
 
         {/* 中间进度条区域 */}
-        <div className="flex flex-1 items-center gap-4 px-4">
+        <div className="flex flex-1 items-center gap-2 md:gap-4 px-2 md:px-4">
           {/* 封面 */}
           <div className="relative w-[34px] h-[34px] rounded bg-[#191919] border border-[#191919] overflow-hidden flex-shrink-0 cursor-pointer">
             {currentSong?.al?.picUrl ? (
@@ -191,26 +191,25 @@ export const PlayerBar = () => {
                 ♫
               </div>
             )}
-            <Link href={currentSong ? `/song/${currentSong.id}` : '#'} className="absolute inset-0 bg-black/0 hover:bg-black/10 transition" />
           </div>
 
           {/* 播放信息与进度条 */}
           <div className="flex flex-col flex-1 h-[34px] justify-between">
             {/* 顶部信息 */}
-            <div className="flex items-center gap-2 h-4 text-xs">
+            <div className="flex items-center gap-1 md:gap-2 h-4 text-[10px] md:text-xs">
               <Link 
                 href={currentSong ? `/song/${currentSong.id}` : '#'} 
-                className="text-[#e8e8e8] hover:underline truncate max-w-[200px]"
+                className="text-[#e8e8e8] hover:underline truncate max-w-[140px] md:max-w-[200px]"
               >
                 {currentSong?.name || "网易云音乐"}
               </Link>
               {currentSong && (
                 <>
                    <span className="text-[#9b9b9b] cursor-default">-</span>
-                   <Link 
+                  <Link 
                     href={`/artist/${currentSong.ar[0].id}`} 
-                    className="text-[#9b9b9b] hover:underline truncate max-w-[150px]"
-                   >
+                    className="hidden md:inline text-[#9b9b9b] hover:underline truncate max-w-[150px]"
+                  >
                      {currentSong.ar.map(a => a.name).join('/')}
                    </Link>
                 </>
@@ -218,7 +217,7 @@ export const PlayerBar = () => {
             </div>
 
             {/* 进度条 */}
-            <div className="flex items-center gap-3 h-4">
+            <div className="flex items-center gap-2 md:gap-3 h-4">
               <div className="flex-1 relative group h-2 flex items-center">
                 <Slider 
                   value={[currentTime]} 

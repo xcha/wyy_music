@@ -82,7 +82,40 @@ export default function PlaylistSongs({ songs, playlistId }: Props) {
           </button>
         )}
       </div>
-      <table className="w-full text-sm text-left">
+      <div className="md:hidden">
+        <ul className="divide-y divide-gray-200 dark:divide-zinc-800">
+          {data.map((song, index) => {
+            const isCurrent = currentSong?.id === song.id;
+            return (
+              <li
+                key={song.id}
+                className="flex items-center justify-between px-3 py-2"
+                onDoubleClick={() => handlePlay(song)}
+              >
+                <div className="flex items-center gap-3 min-w-0">
+                  <button
+                    onClick={() => handlePlay(song)}
+                    className={`w-6 h-6 flex items-center justify-center rounded-full ${isCurrent ? "bg-red-600 text-white" : "bg-gray-100 text-gray-600"}`}
+                  >
+                    <Play className="w-3 h-3" />
+                  </button>
+                  <div className="flex flex-col min-w-0">
+                    <span className={`text-sm truncate ${isCurrent ? "text-red-600" : "text-gray-900 dark:text-gray-100"}`} onClick={() => handlePlay(song)}>
+                      {song.name || "未知歌曲"}
+                    </span>
+                    <span className="text-xs text-gray-600 dark:text-gray-400 truncate">
+                      {song.ar?.map(a => a.name).join("/") || "未知歌手"}
+                    </span>
+                  </div>
+                </div>
+                <span className="text-xs text-gray-500 font-mono">{formatDuration(song.dt || 0)}</span>
+              </li>
+            );
+          })}
+        </ul>
+      </div>
+
+      <table className="w-full text-sm text-left hidden md:table">
         <thead>
           <tr className="h-9 bg-gray-50 dark:bg-zinc-900 border-b border-gray-200 dark:border-zinc-800 text-gray-500">
             <th className="w-12 text-center font-normal"></th>
@@ -132,6 +165,7 @@ export default function PlaylistSongs({ songs, playlistId }: Props) {
                         ? "text-red-600"
                         : "text-gray-800 dark:text-gray-200"
                     }`}
+                    onClick={() => handlePlay(song)}
                   >
                     {song.name || "未知歌曲"}
                   </span>

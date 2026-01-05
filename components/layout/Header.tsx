@@ -24,7 +24,7 @@ const Header = () => {
 
   return (
     <>
-      <header className="fixed top-0 left-0 right-0 z-50 h-16 bg-[#242424] text-white flex items-center justify-between px-6 border-b border-[#000]">
+      <header className="fixed top-0 left-0 right-0 z-50 h-16 bg-[#242424] text-white flex items-center justify-between px-4 md:px-6 border-b border-[#000]">
         <div className="flex items-center gap-8">
           <Link href="/" className="text-xl font-bold flex items-center gap-2">
               <Image src={logo} alt="冈易云音乐" className="w-8 h-8 rounded-full" />
@@ -38,18 +38,18 @@ const Header = () => {
         </div>
 
         <div className="flex items-center gap-4">
-          <div className="relative">
+          <div className="relative w-40 md:w-64">
             <Search className="absolute left-2 top-2.5 h-4 w-4 text-gray-400" />
             <Input 
               placeholder="音乐/视频/电台/用户" 
-              className="pl-8 w-64 h-9 bg-white text-black border-none rounded-full text-xs focus-visible:ring-0" 
+              className="pl-8 w-full h-9 bg-white text-black border-none rounded-full text-xs focus-visible:ring-0" 
               value={searchValue}
               onChange={(e) => setSearchValue(e.target.value)}
               onKeyDown={handleSearch}
             />
           </div>
           {profile ? (
-            <div className="flex items-center gap-2 cursor-pointer group relative">
+            <div className="flex items-center gap-2 cursor-pointer group relative" onClick={() => router.push('/my')}>
               <img src={profile.avatarUrl} alt={profile.nickname} className="w-8 h-8 rounded-full" />
               <span className="text-xs text-gray-300 group-hover:text-white">{profile.nickname}</span>
               <div className="absolute top-full right-0 mt-2 w-32 bg-[#2b2b2b] rounded shadow-xl py-2 hidden group-hover:block">

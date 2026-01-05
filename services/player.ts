@@ -32,7 +32,7 @@ export const getSongUrl = async (
   }
 ) => {
   try {
-    const res = await request.get<SongUrlResponse>('/song/url', {
+    const res = await request.get<SongUrlResponse>('/song/download/url', {
       params: { id, level: options?.level ?? 'standard', unblock: options?.unblock ?? false },
     });
     if (res.data && res.data.length > 0) {
